@@ -27,10 +27,11 @@ This module has been recorded and is available in the SharePoint Development You
 
 ## Version history
 
-| Version |       Date        |             Comments             |
-| ------- | ----------------- | -------------------------------- |
-| 1.1     | December 14, 2018 | Rewritten to use latest guidance |
-| 1.0     | ~February 2017    | Initial release                  |
+| Version |       Date        |                    Comments                    |
+| ------- | ----------------- | ---------------------------------------------- |
+| 1.2     | January 17, 2019  | Slide updates, added screencast link to readme |
+| 1.1     | December 14, 2018 | Rewritten to use latest guidance               |
+| 1.0     | ~February 2017    | Initial release                                |
 
 ## Disclaimer
 
