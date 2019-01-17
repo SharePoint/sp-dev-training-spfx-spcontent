@@ -1,6 +1,6 @@
 # Microsoft SharePoint Framework Training Module - Working with SharePoint Content
 
-This module will introduce you to working with SharePoint content in SharePoint Framework projects.
+This module will introduce you to working with SharePoint content in SharePoint Framework projects. This includes topics like using SharePoint REST API, CRUD operations with SharePoint data, workbench and mock data in SharePoint Framework.
 
 ## Lab - Working with SharePoint Content
 
@@ -13,6 +13,10 @@ In this lab you work with the SharePoint Framework to perform CRUD operations on
 - [Using SPHttpClient to talk to SharePoint](./Demos/01-sphttpclient)
 - [CRUD with SharePoint Data](./Demos/02-spcrud)
 - [Using Mocks to Simulate SharePoint Data](./Demos/03-mockdata)
+
+## Watch the Module - Video
+
+This module has been recorded and is available in the SharePoint Development YouTube channel: [SharePoint Framework Training - Developing with the SharePoint Framework: Working with SharePoint Content](https://www.youtube.com/watch?v=0OiC7AzoCVI&list=PLR9nK3mnD-OV-RPXQ3Lco845qoEy7VJoc)
 
 ## Contributors
 
