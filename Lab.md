@@ -72,7 +72,7 @@ In this exercise you will create a SharePoint Framework (SPFx) web part that wil
         ```
 
 1. Create a new type to represent when someone clicks a button on the React component:
-    1. Create a new file **ButtonClickCalled.ts** in the **models** folder and add the following code to it:
+    1. Create a new file **ButtonClickedCallback.ts** in the **models** folder and add the following code to it:
 
     ```ts
     export type ButtonClickedCallback = () => void;
@@ -152,7 +152,7 @@ In this exercise you will create a SharePoint Framework (SPFx) web part that wil
               <div className={ styles.column }>
                 <p className={ styles.title }>SharePoint Content!</p>
                 <a href="#" className={ styles.button } onClick={ this.onGetListItemsClicked }>
-                  <span className={ styles.label }>Get Counties</span>
+                  <span className={ styles.label }>Get Countries</span>
                 </a>
               </div>
             </div>
@@ -320,7 +320,7 @@ In this exercise, you will extend the SPFx project from the previous exercise to
         ```
 
 1. Update the web part to trigger write operations when the buttons are pressed in the React component:
-    1. Locate and open the **./src/webparts/spFxHttpClientDemo/SpFxHttpClientDemoWebpart.ts** file.
+    1. Locate and open the **./src/webparts/spFxHttpClientDemo/SpFxHttpClientDemoWebPart.ts** file.
     1. Within the `render()` method in the `SpFxHttpClientDemoWebPart` class, locate the code where the public properties are set on the React component `SpFxHttpClientDemo`. It will look like this:
 
         ```ts
@@ -381,7 +381,7 @@ In this exercise, you will extend the SPFx project from the previous exercise to
 
     These will all call different methods which you will add in the rest of this exercise. Each one will add, update or delete an item in the SharePoint list, and then call the existing `_getListItems()` method you created in the previous exercise followed by refreshing the web part by calling `render()` again.
 
-1. In order to work with the SharePoint REST API in the SharePoint Framework, add the following `import` statements to the top of the file, just after the existing `import` statements:
+1. In order to work with the SharePoint REST API in the SharePoint Framework, add the `SPHttpClientResponse` to the  `import` statement which imports `SPHttpClient` from `@microsoft/sp-http` which you added in Excercise 1. After editing, it should look like below:
 
     ```ts
     import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
