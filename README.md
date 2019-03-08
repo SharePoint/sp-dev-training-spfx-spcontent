@@ -10,7 +10,7 @@ In this lab you work with the SharePoint Framework to perform CRUD operations on
 
 ## Demos
 
-- [Using SPHttpClient to talk to SharePoint](./Demos/01-sphttpclient)
+- [Using SPHttpClient to talk to SharePoint](./Demos/01-spfxhttpclient)
 - [CRUD with SharePoint Data](./Demos/02-spcrud)
 - [Using Mocks to Simulate SharePoint Data](./Demos/03-mockdata)
 
