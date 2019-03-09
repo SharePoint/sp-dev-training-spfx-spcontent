@@ -188,7 +188,7 @@ In this exercise you will create a SharePoint Framework (SPFx) web part that wil
     1. After the existing `import` statements at the top of the file, add the following import statements:
 
         ```ts
-        import { SPHttpClient } from '@microsoft/sp-http';
+        import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
         import { ICountryListItem } from '../../models';
         ```
 
@@ -381,12 +381,6 @@ In this exercise, you will extend the SPFx project from the previous exercise to
 
     These will all call different methods which you will add in the rest of this exercise. Each one will add, update or delete an item in the SharePoint list, and then call the existing `_getListItems()` method you created in the previous exercise followed by refreshing the web part by calling `render()` again.
 
-1. In order to work with the SharePoint REST API in the SharePoint Framework, add the following `import` statements to the top of the file, just after the existing `import` statements:
-
-    ```ts
-    import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
-    ```
-
 1. Add the following methods to the `SpFxHttpClientDemoWebPart` class to add a new item to the list:
 
       ```ts
@@ -401,6 +395,7 @@ In this exercise, you will extend the SPFx project from the previous exercise to
             return jsonResponse.ListItemEntityTypeFullName;
           }) as Promise<string>;
       }
+
       private _addListItem(): Promise<SPHttpClientResponse> {
         return this._getItemEntityType()
           .then(spEntityType => {
@@ -421,7 +416,7 @@ In this exercise, you will extend the SPFx project from the previous exercise to
 
       The method `_getItemEntityType()` will get the type of data that the **Countries** list expects. This is done by: 
 
-      - Using the `spHttpClient` API's `get()` method to issue an HTTP GET request tot he SharePoint REST API. This method requires two parameters: (1) the endpoint to query and (2) the configuration to use.
+      - Using the `spHttpClient` API's `get()` method to issue an HTTP GET request to the SharePoint REST API. This method requires two parameters: (1) the endpoint to query and (2) the configuration to use.
       - After processing the response body as JSON...
       - It returns the `ListItemEntityTypeFullName` as a single string value to the caller.
 
@@ -550,7 +545,7 @@ In this exercise, you will extend the SPFx project from the previous exercise to
 
         ![Screenshot of the web part after updating an item](./Images/update-items-sp-02.png)
 
-    1. Test the delete process by selecting the **Delete List Item** button. Notice before selecting it the last item in the last... in this case, the item with the timestamp for the **Title**:
+    1. Test the delete process by selecting the **Delete List Item** button. Notice before selecting it the last item in the list... in this case, the item with the timestamp for the **Title**:
 
         ![Screenshot of the web part delete button](./Images/delete-items-sp-01.png)
 
