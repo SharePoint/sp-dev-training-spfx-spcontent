@@ -72,7 +72,7 @@ In this exercise you will create a SharePoint Framework (SPFx) web part that wil
         ```
 
 1. Create a new type to represent when someone clicks a button on the React component:
-    1. Create a new file **ButtonClickCalled.ts** in the **models** folder and add the following code to it:
+    1. Create a new file **ButtonClickedCallback.ts** in the **models** folder and add the following code to it:
 
     ```ts
     export type ButtonClickedCallback = () => void;
@@ -217,7 +217,7 @@ In this exercise you will create a SharePoint Framework (SPFx) web part that wil
         }
         ```
 
-    1. Add the following method `SpFxHttpClientDemoWebPart` class that retrieves list items from the **Countries** list using the SHarePoint REST API. Notice it will use the `spHttpClient` object to query the SharePoint REST API. When it receives the response, it calls `response.json()` that will process the response as a JSON object and then returns the `value` property in the response to the caller. The `value` property is a collection of list items that match the interface created previously:
+    1. Add the following method `SpFxHttpClientDemoWebPart` class that retrieves list items from the **Countries** list using the SharePoint REST API. Notice it will use the `spHttpClient` object to query the SharePoint REST API. When it receives the response, it calls `response.json()` that will process the response as a JSON object and then returns the `value` property in the response to the caller. The `value` property is a collection of list items that match the interface created previously:
 
         ```ts
         private _getListItems(): Promise<ICountryListItem[]> {
@@ -240,7 +240,7 @@ In this exercise you will create a SharePoint Framework (SPFx) web part that wil
         gulp serve
         ```
 
-    1. The browser will loads the local workbench, but you can not use this for testing because there is no SharePoint context in the local workbench. Instead, navigate to the SharePoint Online site where you created the **Countries** list, and load the hosted workbench at **https://[sharepoint-online-site]/_layouts/workbench.aspx**.
+    1. The browser will load the local workbench, but you can not use this for testing because there is no SharePoint context in the local workbench. Instead, navigate to the SharePoint Online site where you created the **Countries** list, and load the hosted workbench at **https://[sharepoint-online-site]/_layouts/workbench.aspx**.
 
     1. Add the web part to the page: Select the **Add a new web part** control...
 
