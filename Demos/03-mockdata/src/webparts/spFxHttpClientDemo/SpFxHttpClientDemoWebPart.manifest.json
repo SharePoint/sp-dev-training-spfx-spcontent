@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
-  "id": "48a92d71-f878-4722-8eb3-c4c5802bcda7",
+  "id": "10981c5d-babd-4de7-86ff-6ef83e4961ea",
   "alias": "SpFxHttpClientDemoWebPart",
   "componentType": "WebPart",
 
@@ -12,15 +12,16 @@
   // Components that allow authors to embed arbitrary script code should set this to true.
   // https://support.office.com/en-us/article/Turn-scripting-capabilities-on-or-off-1f2c515f-5d7e-448a-9fd7-835da935584f
   "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart"],
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Other" },
-    "title": { "default": "SPFxHttpClientDemo" },
-    "description": { "default": "SPFxHttpClientDemo description" },
+    "title": { "default": "SpFxHttpClientDemo" },
+    "description": { "default": "SpFxHttpClientDemo description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "SPFxHttpClientDemo"
+      "description": "SpFxHttpClientDemo"
     }
   }]
 }
