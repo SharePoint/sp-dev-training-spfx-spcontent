@@ -4,11 +4,11 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
+import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import {
-  BaseClientSideWebPart,
   IPropertyPaneConfiguration,
   PropertyPaneTextField
-} from '@microsoft/sp-webpart-base';
+} from '@microsoft/sp-property-pane';
 
 import * as strings from 'SpFxHttpClientDemoWebPartStrings';
 import SpFxHttpClientDemo from './components/SpFxHttpClientDemo';
@@ -32,7 +32,7 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
         onGetListItems: this._onGetListItems,
         onAddListItem: this._onAddListItem,
         onUpdateListItem: this._onUpdateListItem,
-        onDeleteListItem: this._onDeleteListItem
+        onDeleteListItem: this._onDeleteListItem        
       }
     );
 
@@ -103,7 +103,7 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
         return jsonResponse.ListItemEntityTypeFullName;
       }) as Promise<string>;
   }
-
+  
   private _addListItem(): Promise<SPHttpClientResponse> {
     return this._getItemEntityType()
       .then(spEntityType => {
