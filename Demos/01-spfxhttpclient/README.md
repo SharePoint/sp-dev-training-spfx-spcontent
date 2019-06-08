@@ -16,7 +16,7 @@ In this demo you will create a SharePoint Framework (SPFx) web part that will ge
     gulp serve
     ```
 
-1. The browser will loads the local workbench, but you can not use this for testing because there is no SharePoint context in the local workbench. Instead, navigate to the SharePoint Online site where you created the **Countries** list, and load the hosted workbench at **https://[sharepoint-online-site]/_layouts/workbench.aspx**.
+1. The browser will load the local workbench, but you can not use this for testing because there is no SharePoint context in the local workbench. Instead, navigate to the SharePoint Online site where you created the **Countries** list, and load the hosted workbench at **https://[sharepoint-online-site]/_layouts/workbench.aspx**.
 
 1. Add the web part to the page: Select the **Add a new web part** control...
 
