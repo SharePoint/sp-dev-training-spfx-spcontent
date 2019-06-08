@@ -26,7 +26,7 @@ In this demo you will create a SharePoint Framework (SPFx) web part that will ge
 
     ![Screenshot of the SharePoint workbench](../../Images/add-webpart-02.png)
 
-    ...and select the **SPFxHttpClientContent** web part to add the web part to the page:
+    ...and select the **SPFxHttpClientDemo** web part to add the web part to the page:
 
     ![Screenshot of the SharePoint workbench toolbox](../../Images/add-webpart-03.png)
 
