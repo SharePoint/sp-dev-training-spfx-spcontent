@@ -30,7 +30,7 @@ In this exercise, you will extend the SPFx project from the previous exercise to
 
     ![Screenshot of the SharePoint workbench toolbox](../../Images/add-webpart-03.png)
 
-1. The web part will appear on the page with a four buttons and no data in the list:
+1. The web part will appear on the page with four buttons and no data in the list:
 
     ![Screenshot of the web part with all buttons](../../Images/all-buttons.png)
 
