@@ -143,7 +143,7 @@ In this exercise you will create a SharePoint Framework (SPFx) web part that wil
         ```
 
     1. Locate and open the file **./src/webparts/spFxHttpClientDemo/components/SpFxHttpClientDemo.tsx**.
-    1. Update the markup returned by the `render()` method to the following code. This will create a list using the CSS classes previously under the existing markup displaying the contents of the the `spListItems` property on set on the React component. Also notice that the anchor tag `<a>` that acts as a button has a `onClick` handler wired up to it:
+    1. Update the markup returned by the `render()` method to the following code. This will create a list displaying the data contained in the `spListItems` property rendered using the CSS classes added in the previous step. Also notice that there is an anchor tag `<a>` that acts as a button and has an `onClick` handler wired up to it:
 
         ```html
         <div className={ styles.spFxHttpClientDemo }>
@@ -250,7 +250,7 @@ In this exercise you will create a SharePoint Framework (SPFx) web part that wil
 
         ![Screenshot of the SharePoint workbench](./Images/add-webpart-02.png)
 
-        ...and select the **SPFxHttpClientContent** web part to add the web part to the page:
+        ...and select the **SPFxHttpClientDemo** web part to add the web part to the page:
 
         ![Screenshot of the SharePoint workbench toolbox](./Images/add-webpart-03.png)
 

@@ -15,7 +15,7 @@ export default class SpFxHttpClientDemo extends React.Component<ISpFxHttpClientD
             <div className={ styles.column }>
               <p className={ styles.title }>SharePoint Content!</p>
               <a href="#" className={ styles.button } onClick={ this.onGetListItemsClicked }>
-                <span className={ styles.label }>Get Countries</span>
+                <span className={ styles.label }>Get Counties</span>
               </a>
               <a href="#" className={ styles.button } onClick={ this.onAddListItemClicked }>
                 <span className={ styles.label }>Add List Item</span>
