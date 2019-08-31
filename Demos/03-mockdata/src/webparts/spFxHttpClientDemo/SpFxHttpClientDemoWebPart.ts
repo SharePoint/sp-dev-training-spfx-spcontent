@@ -4,11 +4,11 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import {
+  BaseClientSideWebPart,
   IPropertyPaneConfiguration,
   PropertyPaneTextField
-} from '@microsoft/sp-property-pane';
+} from '@microsoft/sp-webpart-base';
 
 import * as strings from 'SpFxHttpClientDemoWebPartStrings';
 import SpFxHttpClientDemo from './components/SpFxHttpClientDemo';
@@ -16,6 +16,7 @@ import { ISpFxHttpClientDemoProps } from './components/ISpFxHttpClientDemoProps'
 
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import { ICountryListItem } from '../../models';
+
 import { Environment, EnvironmentType } from '@microsoft/sp-core-library';
 
 export interface ISpFxHttpClientDemoWebPartProps {
@@ -33,7 +34,7 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
         onGetListItems: this._onGetListItems,
         onAddListItem: this._onAddListItem,
         onUpdateListItem: this._onUpdateListItem,
-        onDeleteListItem: this._onDeleteListItem        
+        onDeleteListItem: this._onDeleteListItem
       }
     );
 
@@ -136,8 +137,8 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
           request);
         }
       ) ;
-  }  
-
+  }
+  
   private _updateListItem(): Promise<SPHttpClientResponse> {
     // get the first item
     return this.context.spHttpClient.get(
