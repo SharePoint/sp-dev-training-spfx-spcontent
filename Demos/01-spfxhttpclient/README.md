@@ -2,6 +2,21 @@
 
 In this demo you will create a SharePoint Framework (SPFx) web part that will get and display data from a SharePoint list.
 
+### Create a List of Countries for Sample Data
+
+1. In a browser, navigate to a site collection in SharePoint Online.
+    1. Select **Site Contents** in the left-hand navigation.
+    1. Select **New > List** in the toolbar.
+    1. Set the list name to **Countries** and select **Create**.
+
+        ![Screenshot showing form to create a list](../../Images/create-countries-list01.png)
+
+    1. Add items to the list by entering the names of different countries as shown in the following image.
+
+        ![Screenshot showing sample countries in the list](../../Images/create-countries-list02.png)
+
+### Create the web part to display data using the SharePoint REST API
+
 1. Install the project dependencies:
     1. Open a command prompt and navigate to the folder that contains this demo.
     1. Execute the following command:
