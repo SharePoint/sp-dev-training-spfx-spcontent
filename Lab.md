@@ -76,9 +76,9 @@ In this exercise you will create a SharePoint Framework (SPFx) web part that wil
 1. Create a new type to represent when someone clicks a button on the React component:
     1. Create a new file **ButtonClickedCallback.ts** in the **models** folder and add the following code to it:
 
-    ```ts
-    export type ButtonClickedCallback = () => void;
-    ```
+      ```ts
+      export type ButtonClickedCallback = () => void;
+      ```
 
     1. Create a new file **index.ts** in the **models** folder and add the following code to it:
 
@@ -88,7 +88,7 @@ In this exercise you will create a SharePoint Framework (SPFx) web part that wil
         ```
 
 1. Update the public interface for the React component:
-    1. Locate and open the file **./src/webparts/spFxHttpClientDemo/components/ISpFxHttpClientDemoProps.ts**. This is the interface for the public properties on the React component. It will need to display a list of items, so update the signature to accept a list of items.
+    1. Locate and open the file **./src/webparts/spFxHttpClientDemo/components/ISpFxHttpClientDemoProps.ts**. This is the interface for the public properties of the React component. It will need to display a list of items, so update the signature to accept a list of items.
     1. Add the following code to the top of the file:
 
         ```ts
@@ -175,7 +175,7 @@ In this exercise you will create a SharePoint Framework (SPFx) web part that wil
         </div>
         ```
 
-    1. Add the following event handler to the `SpFxHttpClientDemo` class to handle the click event on the button. This code will prevent the default action of the `<a>` element from navigating away (or refreshing) from the page and call the callback set on the public property, notifying the consumer of the component an event occurred:
+    1. Add the following event handler to the `SpFxHttpClientDemo` class to handle the click event on the button. This code will prevent the default action of the `<a>` element from navigating away from (or refreshing) the page and call the callback set on the public property, notifying the consumer of the component an event occurred:
 
         ```ts
         private onGetListItemsClicked = (event: React.MouseEvent<HTMLAnchorElement>): void => {
@@ -200,7 +200,7 @@ In this exercise you will create a SharePoint Framework (SPFx) web part that wil
         private _countries: ICountryListItem[] = [];
         ```
 
-    1. Locate the `render()` method. Within this method notice that it is creating an instance of the component `SpFxHttpClientDemo` and then setting it's public properties. The default code sets the `description` property, however this was removed from the interface `ISpFxHttpClientDemoProps` in the previous steps. Update the properties to set the list of countries to the private member previously added above as well as attach to the event handler:
+    1. Locate the `render()` method. Within this method notice that it is creating an instance of the component `SpFxHttpClientDemo` and then setting it's public properties. The default code sets the `description` property, however this was removed from the interface `ISpFxHttpClientDemoProps` in the previous steps. Update the properties to set the list of countries to the private member added above as well as attach to the event handler:
 
         ```ts
         spListItems: this._countries,
@@ -381,7 +381,7 @@ In this exercise, you will extend the SPFx project from the previous exercise to
     }
     ```
 
-    These will all call different methods which you will add in the rest of this exercise. Each one will add, update or delete an item in the SharePoint list, and then call the existing `_getListItems()` method you created in the previous exercise followed by refreshing the web part by calling `render()` again.
+    These event handlers will call different methods which you will add in the remainder of this exercise. Each one will add, update, or delete an item in the SharePoint list, call the existing `_getListItems()` method you created in the previous exercise, and refresh the web part by calling `render()`.
 
 1. Add the following methods to the `SpFxHttpClientDemoWebPart` class to add a new item to the list:
 
@@ -595,7 +595,7 @@ In this exercise, you will extend the SPFx project from the previous exercise to
         }
         ```
 
-1. Update the web part to use mock data when running in the local workbench when the **Get Countries** button is pressed. Locate the `_onGetListItems` handler and update it's contents to the following code. This will first check if the web part is in the local workbench (`!this._isSharePoint`). if it is, it will return mock data. Otherwise it will run the previous code that will call the SharePoint REST API:
+1. Update the web part to use mock data when the **Get Countries** button is pressed while running in the local workbench. Locate the `_onGetListItems` handler and update it's contents to the following code. This will first check if the web part is in the local workbench (`!this._isSharePoint`). If it is, it will return mock data. Otherwise it will run the previous code that will call the SharePoint REST API:
 
     ```ts
     if (!this._isSharePoint) {
