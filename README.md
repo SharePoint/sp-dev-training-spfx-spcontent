@@ -1,18 +1,30 @@
-# Microsoft SharePoint Framework Training Module - Working with SharePoint Content
+# Microsoft SharePoint Framework Training Module - Work with SharePoint Content using the SharePoint Framework
 
-This module will introduce you to working with SharePoint content in SharePoint Framework projects. This includes topics like using SharePoint REST API, CRUD operations with SharePoint data, workbench and mock data in SharePoint Framework.
+This module will introduce you to working with SharePoint content in SharePoint Framework projects. You'll learn about the SharePoint REST API, do CRUD operations with SharePoint data, the local workbench and creating mock data in SharePoint Framework.
 
-## Lab - Working with SharePoint Content
+> This module is also published as a Microsoft Learn module: [Work with SharePoint Content using the SharePoint Framework](https://docs.microsoft.com/learn/modules/sharepoint-spfx-spcontent)
 
-In this lab you work with the SharePoint Framework to perform CRUD operations on SharePoint lists and libraries.
+## Lab - Work with SharePoint Content using the SharePoint Framework
 
-- [Lab manual](./Lab.md)
+The lab for this module is available in multiple units within the associated Microsoft Learn module. Use the following links to jump to the specific unit. Each Microsoft Learn unit represents a different lab exercise & demo in the presentation.
+
+- [Exercise - Retrieve and display list data with the SharePoint REST API](https://docs.microsoft.com/learn/modules/sharepoint-spfx-spcontent/3-exercise-get-data)
+
+    In this exercise, you'll create a SharePoint Framework (SPFx) web part that will get and display data from a SharePoint list using the SharePoint REST API.
+
+- [Exercise - Write operations using the SharePoint Framework APIs and SharePoint REST API](https://docs.microsoft.com/learn/modules/sharepoint-spfx-spcontent/5-exercise-crud-operations)
+
+    In this exercise, you'll extend the SharePoint Framework project from the previous exercise to add write capabilities using the SharePoint REST API.
+
+- [Exercise - Use mocks to simulate SharePoint data](https://docs.microsoft.com/learn/modules/sharepoint-spfx-spcontent/7-exercise-using-mocks)
+
+    In this exercise, you'll extend the SharePoint Framework project from the previous exercises to add logic so mock data is used when the web part is run from the local workbench.
 
 ## Demos
 
-- [Using SPHttpClient to talk to SharePoint](./Demos/01-spfxhttpclient)
-- [CRUD with SharePoint Data](./Demos/02-spcrud)
-- [Using Mocks to Simulate SharePoint Data](./Demos/03-mockdata)
+- [Retrieve and display list data with the SharePoint REST API](./Demos/01-spfxhttpclient)
+- [Write operations using the SharePoint Framework APIs and SharePoint REST API](./Demos/02-spcrud)
+- [Use mocks to simulate SharePoint data](./Demos/03-mockdata)
 
 ## Watch the Module - Video
 
@@ -20,23 +32,24 @@ This module has been recorded and is available in the SharePoint Development You
 
 ## Contributors
 
-|        Roles         |                                       Author(s)                                       |
-| -------------------- | ------------------------------------------------------------------------------------- |
-| Lab Manuals / Slides | Andrew Connell (Microsoft MVP, Voitanos) [@andrewconnell](//github.com/andrewconnell) |
-| QA                   | Rob Windsor (Microsoft MVP, PAIT Group) [@rob-windsor](//github.com/rob-windsor)      |
-| Sponsor / Support    | Vesa Juvonen (Microsoft) [@VesaJuvonen](//github.com/VesaJuvonen)                     |
+|        Roles         |                                                   Author(s)                                                    |
+| -------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Lab Manuals / Slides | Andrew Connell (Microsoft MVP, [Voitanos](//github.com/voitanos)) [@andrewconnell](//github.com/andrewconnell) |
+| QA                   | Rob Windsor (Microsoft MVP, PAIT Group) [@rob-windsor](//github.com/rob-windsor)                               |
+| Sponsor / Support    | Vesa Juvonen (Microsoft) [@VesaJuvonen](//github.com/VesaJuvonen)                                              |
 
 ## Version history
 
-| Version |       Date        |                    Comments                    |
-| ------- | ----------------- | ---------------------------------------------- |
-| 1.6     | December 6, 2019  | 2020Q2 content refresh                         |
-| 1.5     | September 2, 2019 | 2020Q1 content refresh                         |
-| 1.4     | June 10, 2019     | FY2019Q4 content refresh                       |
-| 1.3     | March 11, 2019    | FY2019Q3 content refresh                       |
-| 1.2     | January 17, 2019  | Slide updates, added screencast link to readme |
-| 1.1     | December 14, 2018 | Rewritten to use latest guidance               |
-| 1.0     | ~February 2017    | Initial release                                |
+| Version |       Date        |                      Comments                      |
+| ------- | ----------------- | -------------------------------------------------- |
+| 1.7     | March 10, 2020    | FY2020Q3 content refresh & port module to MS Learn |
+| 1.6     | December 6, 2019  | FY2020Q2 content refresh                           |
+| 1.5     | September 2, 2019 | FY2020Q1 content refresh                           |
+| 1.4     | June 10, 2019     | FY2019Q4 content refresh                           |
+| 1.3     | March 11, 2019    | FY2019Q3 content refresh                           |
+| 1.2     | January 17, 2019  | Slide updates, added screencast link to readme     |
+| 1.1     | December 14, 2018 | Rewritten to use latest guidance                   |
+| 1.0     | ~February 2017    | Initial release                                    |
 
 ## Disclaimer
 
