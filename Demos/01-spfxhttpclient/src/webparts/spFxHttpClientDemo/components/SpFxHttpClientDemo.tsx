@@ -39,7 +39,7 @@ export default class SpFxHttpClientDemo extends React.Component<ISpFxHttpClientD
 
   private onGetListItemsClicked = (event: React.MouseEvent<HTMLAnchorElement>): void => {
     event.preventDefault();
-  
+
     this.props.onGetListItems();
-  }  
+  }
 }

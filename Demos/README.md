@@ -1,12 +1,12 @@
-# Microsoft SharePoint Framework Training Module - Working with SharePoint Content
+# Microsoft SharePoint Framework Training Module - Work with SharePoint Content using the SharePoint Framework
 
-This folder contains demos for the SharePoint Framework training module on Working with the Web Part Property Pane.
+This folder contains demos associated with the slide decks in this module.
 
 ## Demos
 
-- [Using SPHttpClient to talk to SharePoint](./01-sphttpclient)
-- [CRUD with SharePoint Data](./02-spcrud)
-- [Using Mocks to Simulate SharePoint Data](./03-mockdata)
+- [Retrieve and display list data with the SharePoint REST API](./01-spfxhttpclient)
+- [Write operations using the SharePoint Framework APIs and SharePoint REST API](./02-spcrud)
+- [Use mocks to simulate SharePoint data](./03-mockdata)
 
 ## Running demonstrations
 

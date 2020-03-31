@@ -8,5 +8,5 @@ import {
 
 export interface ISpFxHttpClientDemoProps {
   spListItems: ICountryListItem[];
-  onGetListItems?: ButtonClickedCallback
+  onGetListItems?: ButtonClickedCallback;
 }

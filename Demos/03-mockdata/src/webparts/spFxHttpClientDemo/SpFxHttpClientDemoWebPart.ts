@@ -1,21 +1,21 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
+import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
+import { ICountryListItem } from '../../models';
+
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
-  BaseClientSideWebPart,
   IPropertyPaneConfiguration,
   PropertyPaneTextField
-} from '@microsoft/sp-webpart-base';
+} from '@microsoft/sp-property-pane';
+import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'SpFxHttpClientDemoWebPartStrings';
 import SpFxHttpClientDemo from './components/SpFxHttpClientDemo';
 import { ISpFxHttpClientDemoProps } from './components/ISpFxHttpClientDemoProps';
-
-import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
-import { ICountryListItem } from '../../models';
 
 import { Environment, EnvironmentType } from '@microsoft/sp-core-library';
 
@@ -23,11 +23,11 @@ export interface ISpFxHttpClientDemoWebPartProps {
   description: string;
 }
 
-export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISpFxHttpClientDemoWebPartProps> {
+export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart <ISpFxHttpClientDemoWebPartProps> {
   private _countries: ICountryListItem[] = [];
 
   public render(): void {
-    const element: React.ReactElement<ISpFxHttpClientDemoProps > = React.createElement(
+    const element: React.ReactElement<ISpFxHttpClientDemoProps> = React.createElement(
       SpFxHttpClientDemo,
       {
         spListItems: this._countries,
@@ -137,8 +137,8 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
           request);
         }
       ) ;
-  }
-  
+  }  
+
   private _updateListItem(): Promise<SPHttpClientResponse> {
     // get the first item
     return this.context.spHttpClient.get(

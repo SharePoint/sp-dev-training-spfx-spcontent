@@ -11,5 +11,5 @@ export interface ISpFxHttpClientDemoProps {
   onGetListItems?: ButtonClickedCallback;
   onAddListItem?: ButtonClickedCallback;
   onUpdateListItem?: ButtonClickedCallback;
-  onDeleteListItem?: ButtonClickedCallback;
+  onDeleteListItem?: ButtonClickedCallback;  
 }

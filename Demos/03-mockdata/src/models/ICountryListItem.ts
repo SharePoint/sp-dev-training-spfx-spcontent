@@ -2,6 +2,6 @@
 // Licensed under the MIT license.
 
 export interface ICountryListItem {
-    Id: string;
-    Title: string;
+  Id: string;
+  Title: string;
 }
