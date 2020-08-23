@@ -1,9 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
-import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
-import { ICountryListItem } from '../../models';
-
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
@@ -17,13 +14,19 @@ import * as strings from 'SpFxHttpClientDemoWebPartStrings';
 import SpFxHttpClientDemo from './components/SpFxHttpClientDemo';
 import { ISpFxHttpClientDemoProps } from './components/ISpFxHttpClientDemoProps';
 
-import { Environment, EnvironmentType } from '@microsoft/sp-core-library';
+import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
+import { ICountryListItem } from '../../models';
+
+import {
+  Environment,
+  EnvironmentType
+} from '@microsoft/sp-core-library';
 
 export interface ISpFxHttpClientDemoWebPartProps {
   description: string;
 }
 
-export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart <ISpFxHttpClientDemoWebPartProps> {
+export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISpFxHttpClientDemoWebPartProps> {
   private _countries: ICountryListItem[] = [];
 
   public render(): void {
@@ -57,7 +60,7 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart <IS
           this.render();
         });
     }
-  }  
+  }
 
   private _onAddListItem = (): void => {
     if (!this._isSharePoint) { return; }
@@ -71,7 +74,7 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart <IS
           });
       });
   }
-  
+
   private _onUpdateListItem = (): void => {
     if (!this._isSharePoint) { return; }
 
@@ -84,7 +87,7 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart <IS
           });
       });
   }
-  
+
   private _onDeleteListItem = (): void => {
     if (!this._isSharePoint) { return; }
     
@@ -96,11 +99,11 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart <IS
             this.render();
           });
       });
-  }  
+  }
 
   private _getListItems(): Promise<ICountryListItem[]> {
     return this.context.spHttpClient.get(
-      this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items?$select=Id,Title`, 
+      this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items?$select=Id,Title`,
       SPHttpClient.configurations.v1)
       .then(response => {
         return response.json();
@@ -108,12 +111,12 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart <IS
       .then(jsonResponse => {
         return jsonResponse.value;
       }) as Promise<ICountryListItem[]>;
-  }  
+  }
 
   private _getItemEntityType(): Promise<string> {
     return this.context.spHttpClient.get(
-        this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')?$select=ListItemEntityTypeFullName`,
-        SPHttpClient.configurations.v1)
+      this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')?$select=ListItemEntityTypeFullName`,
+      SPHttpClient.configurations.v1)
       .then(response => {
         return response.json();
       })
@@ -121,7 +124,7 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart <IS
         return jsonResponse.ListItemEntityTypeFullName;
       }) as Promise<string>;
   }
-  
+
   private _addListItem(): Promise<SPHttpClientResponse> {
     return this._getItemEntityType()
       .then(spEntityType => {
@@ -130,20 +133,20 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart <IS
           Title: new Date().toUTCString(),
           '@odata.type': spEntityType
         });
-  
+
         return this.context.spHttpClient.post(
           this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items`,
           SPHttpClient.configurations.v1,
           request);
-        }
-      ) ;
-  }  
+      }
+      );
+  }
 
   private _updateListItem(): Promise<SPHttpClientResponse> {
     // get the first item
     return this.context.spHttpClient.get(
-        this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items?$select=Id,Title&$filter=Title eq 'United States'`, 
-        SPHttpClient.configurations.v1)
+      this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items?$select=Id,Title&$filter=Title eq 'United States'`,
+      SPHttpClient.configurations.v1)
       .then(response => {
         return response.json();
       })
@@ -160,19 +163,19 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart <IS
           'IF-MATCH': (listItem as any)['@odata.etag']
         };
         request.body = JSON.stringify(listItem);
-  
+
         return this.context.spHttpClient.post(
           this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items(${listItem.Id})`,
           SPHttpClient.configurations.v1,
           request);
       });
-  }  
+  }
 
   private _deleteListItem(): Promise<SPHttpClientResponse> {
     // get the last item
     return this.context.spHttpClient.get(
-        this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items?$select=Id,Title&$orderby=ID desc&$top=1`, 
-        SPHttpClient.configurations.v1)
+      this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items?$select=Id,Title&$orderby=ID desc&$top=1`,
+      SPHttpClient.configurations.v1)
       .then(response => {
         return response.json();
       })
@@ -186,17 +189,17 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart <IS
           'IF-MATCH': '*'
         };
         request.body = JSON.stringify(listItem);
-  
+
         return this.context.spHttpClient.post(
           this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items(${listItem.Id})`,
           SPHttpClient.configurations.v1,
           request);
       });
-  }  
+  }
 
   private get _isSharePoint(): boolean {
     return (Environment.type === EnvironmentType.SharePoint || Environment.type === EnvironmentType.ClassicSharePoint);
-  }  
+  }
 
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);
