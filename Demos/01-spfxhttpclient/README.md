@@ -1,6 +1,6 @@
 # DEMO: Using SPHttpClient to talk to SharePoint
 
-This completed project is the result of the lab exercise **Using SPHttpClient to talk to SharePoint** that is referenced in the [README](../../) in this repo.
+This completed project is the result of the lab exercise **Using SPHttpClient to talk to SharePoint** that is referenced in the [README](../../README.md) in this repo.
 
 ## Prerequisites
 

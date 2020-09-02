@@ -10,15 +10,15 @@ The lab for this module is available in multiple units within the associated Mic
 
 - [Exercise - Retrieve and display list data with the SharePoint REST API](https://docs.microsoft.com/learn/modules/sharepoint-spfx-spcontent/3-exercise-get-data)
 
-    In this exercise, you'll create a SharePoint Framework (SPFx) web part that will get and display data from a SharePoint list using the SharePoint REST API.
+  In this exercise, you'll create a SharePoint Framework (SPFx) web part that will get and display data from a SharePoint list using the SharePoint REST API.
 
 - [Exercise - Write operations using the SharePoint Framework APIs and SharePoint REST API](https://docs.microsoft.com/learn/modules/sharepoint-spfx-spcontent/5-exercise-crud-operations)
 
-    In this exercise, you'll extend the SharePoint Framework project from the previous exercise to add write capabilities using the SharePoint REST API.
+  In this exercise, you'll extend the SharePoint Framework project from the previous exercise to add write capabilities using the SharePoint REST API.
 
 - [Exercise - Use mocks to simulate SharePoint data](https://docs.microsoft.com/learn/modules/sharepoint-spfx-spcontent/7-exercise-using-mocks)
 
-    In this exercise, you'll extend the SharePoint Framework project from the previous exercises to add logic so mock data is used when the web part is run from the local workbench.
+  In this exercise, you'll extend the SharePoint Framework project from the previous exercises to add logic so mock data is used when the web part is run from the local workbench.
 
 ## Demos
 
@@ -32,7 +32,7 @@ This module has been recorded and is available in the SharePoint Development You
 
 ## Contributors
 
-|        Roles         |                                                   Author(s)                                                    |
+| Roles                | Author(s)                                                                                                      |
 | -------------------- | -------------------------------------------------------------------------------------------------------------- |
 | Lab Manuals / Slides | Andrew Connell (Microsoft MVP, [Voitanos](//github.com/voitanos)) [@andrewconnell](//github.com/andrewconnell) |
 | QA                   | Rob Windsor (Microsoft MVP, PAIT Group) [@rob-windsor](//github.com/rob-windsor)                               |
@@ -40,8 +40,9 @@ This module has been recorded and is available in the SharePoint Development You
 
 ## Version history
 
-| Version |       Date        |                      Comments                      |
+| Version | Date              | Comments                                           |
 | ------- | ----------------- | -------------------------------------------------- |
+| 1.8     | August 31, 2020   | FY2021Q1 content refresh                           |
 | 1.7     | March 10, 2020    | FY2020Q3 content refresh & port module to MS Learn |
 | 1.6     | December 6, 2019  | FY2020Q2 content refresh                           |
 | 1.5     | September 2, 2019 | FY2020Q1 content refresh                           |

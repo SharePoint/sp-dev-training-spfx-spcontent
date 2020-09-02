@@ -17,15 +17,15 @@ export default class SpFxHttpClientDemo extends React.Component<ISpFxHttpClientD
               <a href="#" className={styles.button} onClick={this.onGetListItemsClicked}>
                 <span className={styles.label}>Get Counties</span>
               </a>
-              <a href="#" className={ styles.button } onClick={ this.onAddListItemClicked }>
-                <span className={ styles.label }>Add List Item</span>
+              <a href="#" className={styles.button} onClick={this.onAddListItemClicked}>
+                <span className={styles.label}>Add List Item</span>
               </a>
-              <a href="#" className={ styles.button } onClick={ this.onUpdateListItemClicked }>
-                <span className={ styles.label }>Update List Item</span>
+              <a href="#" className={styles.button} onClick={this.onUpdateListItemClicked}>
+                <span className={styles.label}>Update List Item</span>
               </a>
-              <a href="#" className={ styles.button } onClick={ this.onDeleteListItemClicked }>
-                <span className={ styles.label }>Delete List Item</span>
-              </a>              
+              <a href="#" className={styles.button} onClick={this.onDeleteListItemClicked}>
+                <span className={styles.label}>Delete List Item</span>
+              </a>
             </div>
           </div>
 
@@ -54,19 +54,19 @@ export default class SpFxHttpClientDemo extends React.Component<ISpFxHttpClientD
 
   private onAddListItemClicked = (event: React.MouseEvent<HTMLAnchorElement>): void => {
     event.preventDefault();
-  
+
     this.props.onAddListItem();
   }
-  
+
   private onUpdateListItemClicked = (event: React.MouseEvent<HTMLAnchorElement>): void => {
     event.preventDefault();
-  
+
     this.props.onUpdateListItem();
   }
-  
+
   private onDeleteListItemClicked = (event: React.MouseEvent<HTMLAnchorElement>): void => {
     event.preventDefault();
-  
+
     this.props.onDeleteListItem();
-  }  
+  }
 }
