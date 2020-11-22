@@ -1,6 +1,6 @@
-# DEMO: Using SPHttpClient to talk to SharePoint
+# DEMO: Retrieve and display list data with the SharePoint REST API
 
-This completed project is the result of the lab exercise **Using SPHttpClient to talk to SharePoint** that is referenced in the [README](../../README.md) in this repo.
+This completed project is the result of the lab exercise **Retrieve and display list data with the SharePoint REST API** that is referenced in the [README](../../README.md) in this repo.
 
 ## Prerequisites
 
