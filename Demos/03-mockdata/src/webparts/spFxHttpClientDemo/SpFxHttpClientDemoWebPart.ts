@@ -29,6 +29,10 @@ export interface ISpFxHttpClientDemoWebPartProps {
 export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISpFxHttpClientDemoWebPartProps> {
   private _countries: ICountryListItem[] = [];
 
+  private get _isSharePoint(): boolean {
+    return (Environment.type === EnvironmentType.SharePoint || Environment.type === EnvironmentType.ClassicSharePoint);
+  }
+
   public render(): void {
     const element: React.ReactElement<ISpFxHttpClientDemoProps> = React.createElement(
       SpFxHttpClientDemo,
@@ -195,10 +199,6 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
           SPHttpClient.configurations.v1,
           request);
       });
-  }
-
-  private get _isSharePoint(): boolean {
-    return (Environment.type === EnvironmentType.SharePoint || Environment.type === EnvironmentType.ClassicSharePoint);
   }
 
   protected onDispose(): void {
