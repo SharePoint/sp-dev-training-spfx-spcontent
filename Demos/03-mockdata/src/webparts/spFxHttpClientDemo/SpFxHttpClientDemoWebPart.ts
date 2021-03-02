@@ -68,7 +68,6 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
 
   private _onAddListItem = (): void => {
     if (!this._isSharePoint) { return; }
-
     this._addListItem()
       .then(() => {
         this._getListItems()
@@ -81,7 +80,6 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
 
   private _onUpdateListItem = (): void => {
     if (!this._isSharePoint) { return; }
-
     this._updateListItem()
       .then(() => {
         this._getListItems()
@@ -94,7 +92,6 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
 
   private _onDeleteListItem = (): void => {
     if (!this._isSharePoint) { return; }
-    
     this._deleteListItem()
       .then(() => {
         this._getListItems()
