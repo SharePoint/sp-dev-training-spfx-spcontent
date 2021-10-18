@@ -29,6 +29,10 @@ export interface ISpFxHttpClientDemoWebPartProps {
 export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISpFxHttpClientDemoWebPartProps> {
   private _countries: ICountryListItem[] = [];
 
+  private get _isSharePoint(): boolean {
+    return (Environment.type === EnvironmentType.SharePoint || Environment.type === EnvironmentType.ClassicSharePoint);
+  }
+
   public render(): void {
     const element: React.ReactElement<ISpFxHttpClientDemoProps> = React.createElement(
       SpFxHttpClientDemo,
@@ -64,6 +68,7 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
 
   private _onAddListItem = (): void => {
     if (!this._isSharePoint) { return; }
+
     this._addListItem()
       .then(() => {
         this._getListItems()
@@ -76,6 +81,7 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
 
   private _onUpdateListItem = (): void => {
     if (!this._isSharePoint) { return; }
+
     this._updateListItem()
       .then(() => {
         this._getListItems()
@@ -88,6 +94,7 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
 
   private _onDeleteListItem = (): void => {
     if (!this._isSharePoint) { return; }
+    
     this._deleteListItem()
       .then(() => {
         this._getListItems()
@@ -192,10 +199,6 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
           SPHttpClient.configurations.v1,
           request);
       });
-  }
-
-  private get _isSharePoint(): boolean {
-    return (Environment.type === EnvironmentType.SharePoint || Environment.type === EnvironmentType.ClassicSharePoint);
   }
 
   protected onDispose(): void {

@@ -40,20 +40,21 @@ This module has been recorded and is available in the SharePoint Development You
 
 ## Version history
 
-| Version |       Date        |                      Comments                      |
-| ------- | ----------------- | -------------------------------------------------- |
-| 1.11    | June 17, 2021     | FY2021Q4 content refresh                           |
-| 1.10    | March 6, 2021     | FY2021Q3 content refresh                           |
-| 1.9     | November 30, 2020 | FY2021Q2 content refresh                           |
-| 1.8     | August 31, 2020   | FY2021Q1 content refresh                           |
-| 1.7     | March 10, 2020    | FY2020Q3 content refresh & port module to MS Learn |
-| 1.6     | December 6, 2019  | FY2020Q2 content refresh                           |
-| 1.5     | September 2, 2019 | FY2020Q1 content refresh                           |
-| 1.4     | June 10, 2019     | FY2019Q4 content refresh                           |
-| 1.3     | March 11, 2019    | FY2019Q3 content refresh                           |
-| 1.2     | January 17, 2019  | Slide updates, added screencast link to readme     |
-| 1.1     | December 14, 2018 | Rewritten to use latest guidance                   |
-| 1.0     | ~February 2017    | Initial release                                    |
+| Version |        Date        |                      Comments                      |
+| ------- | ------------------ | -------------------------------------------------- |
+| 1.12    | September 13, 2021 | FY2022Q1 content refresh                           |
+| 1.11    | June 17, 2021      | FY2021Q4 content refresh                           |
+| 1.10    | March 6, 2021      | FY2021Q3 content refresh                           |
+| 1.9     | November 30, 2020  | FY2021Q2 content refresh                           |
+| 1.8     | August 31, 2020    | FY2021Q1 content refresh                           |
+| 1.7     | March 10, 2020     | FY2020Q3 content refresh & port module to MS Learn |
+| 1.6     | December 6, 2019   | FY2020Q2 content refresh                           |
+| 1.5     | September 2, 2019  | FY2020Q1 content refresh                           |
+| 1.4     | June 10, 2019      | FY2019Q4 content refresh                           |
+| 1.3     | March 11, 2019     | FY2019Q3 content refresh                           |
+| 1.2     | January 17, 2019   | Slide updates, added screencast link to readme     |
+| 1.1     | December 14, 2018  | Rewritten to use latest guidance                   |
+| 1.0     | ~February 2017     | Initial release                                    |
 
 ## Disclaimer
 
