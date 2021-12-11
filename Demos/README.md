@@ -6,7 +6,7 @@ This folder contains demos associated with the slide decks in this module.
 
 - [Retrieve and display list data with the SharePoint REST API](./01-spfxhttpclient)
 - [Write operations using the SharePoint Framework APIs and SharePoint REST API](./02-spcrud)
-- [Use mocks to simulate SharePoint data](./03-mockdata)
+- [Upload files to SharePoint libraries with the SharePoint REST API](./03-uploadfile)
 
 ## Running demonstrations
 
