@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
-  "id": "ec1754c8-0f44-4d3c-a683-af9d2cae8bd7",
+  "id": "85f8aa24-fd9e-49be-9954-396d058d93cd",
   "alias": "SpFxHttpClientDemoWebPart",
   "componentType": "WebPart",
 
@@ -12,16 +12,17 @@
   // Components that allow authors to embed arbitrary script code should set this to true.
   // https://support.office.com/en-us/article/Turn-scripting-capabilities-on-or-off-1f2c515f-5d7e-448a-9fd7-835da935584f
   "requiresCustomScript": false,
-  "supportedHosts": ["SharePointWebPart"],
+  "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab", "SharePointFullPage"],
+  "supportsThemeVariants": true,
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Other" },
-    "title": { "default": "SpFxHttpClientDemo" },
-    "description": { "default": "SpFxHttpClientDemo description" },
+    "title": { "default": "SPFxHttpClientDemo" },
+    "description": { "default": "SPFxHttpClientDemo description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "SpFxHttpClientDemo"
+      "description": "SPFxHttpClientDemo"
     }
   }]
 }

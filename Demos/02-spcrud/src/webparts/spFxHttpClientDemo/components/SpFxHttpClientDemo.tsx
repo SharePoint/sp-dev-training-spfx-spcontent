@@ -69,4 +69,5 @@ export default class SpFxHttpClientDemo extends React.Component<ISpFxHttpClientD
 
     this.props.onDeleteListItem();
   }
+
 }
