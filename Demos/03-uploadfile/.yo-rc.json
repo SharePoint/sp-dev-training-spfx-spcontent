@@ -4,8 +4,8 @@
     "isCreatingSolution": true,
     "environment": "spo",
     "version": "1.13.1",
-    "libraryName": "uploadfile",
-    "libraryId": "73850d30-8c60-464b-be65-2dcf09facd73",
+    "libraryName": "file-upload",
+    "libraryId": "e6594605-3ed8-4d5d-8837-a56c25a02d6a",
     "packageManager": "npm",
     "isDomainIsolated": false,
     "componentType": "webpart"
