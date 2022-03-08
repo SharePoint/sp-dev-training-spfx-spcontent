@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
-  "id": "8e7960d5-a2e2-4a86-ae01-2fad7dadfae2",
+  "id": "1c494e41-ab5f-45ba-808c-0a212821bf6c",
   "alias": "FileUploadWebPart",
   "componentType": "WebPart",
 
@@ -18,11 +18,11 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Other" },
-    "title": { "default": "File Upload" },
-    "description": { "default": "File Upload description" },
+    "title": { "default": "FileUpload" },
+    "description": { "default": "FileUpload description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "File Upload"
+      "description": "FileUpload"
     }
   }]
 }

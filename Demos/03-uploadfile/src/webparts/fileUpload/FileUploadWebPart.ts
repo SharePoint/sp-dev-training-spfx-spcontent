@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license.
+
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
@@ -17,6 +20,7 @@ import {
 export interface IFileUploadWebPartProps {
   description: string;
 }
+
 export default class FileUploadWebPart extends BaseClientSideWebPart<IFileUploadWebPartProps> {
 
   public render(): void {
@@ -37,16 +41,37 @@ export default class FileUploadWebPart extends BaseClientSideWebPart<IFileUpload
 
     // wire up button control
     const uploadButton = document.getElementsByClassName(`${styles.fileUpload}-uploadButton`)[0] as HTMLButtonElement;
+
     uploadButton.addEventListener('click', async () => {
       // get filename
       const filePathParts = inputFileElement.value.split('\\');
-      const fileName = filePathParts[filePathParts.length -1];
+      const fileName = filePathParts[filePathParts.length - 1];
 
       // get file data
       const fileData = await this._getFileBuffer(inputFileElement.files[0]);
 
       // upload file
       await this._uploadFile(fileData, fileName);
+    });
+  }
+
+  private _getFileBuffer(file: File): Promise<ArrayBuffer> {
+    return new Promise((resolve, reject) => {
+      let fileReader = new FileReader();
+
+      // write up error handler
+      fileReader.onerror = (event: ProgressEvent<FileReader>) => {
+        reject(event.target.error);
+      };
+
+      // wire up when finished reading file
+      fileReader.onloadend = (event: ProgressEvent<FileReader>) => {
+        resolve(event.target.result as ArrayBuffer);
+      };
+
+      // read file
+      fileReader.readAsArrayBuffer(file);
+
     });
   }
 
@@ -68,27 +93,6 @@ export default class FileUploadWebPart extends BaseClientSideWebPart<IFileUpload
     } else {
       throw new Error(`Error uploading file: ${response.statusText}`);
     }
-  }
-
-  private _getFileBuffer(file: File): Promise<ArrayBuffer> {
-    return new Promise((resolve, reject) => {
-      let fileReader = new FileReader();
-
-      // write up error handler
-      fileReader.onerror = (event: ProgressEvent<FileReader>) => {
-        reject(event.target.error);
-      };
-
-      // wire up when finished reading file
-      fileReader.onloadend = (event: ProgressEvent<FileReader>) => {
-        resolve(event.target.result as ArrayBuffer);
-      };
-
-      // read file
-      fileReader.readAsArrayBuffer(file);
-
-    });
-
   }
 
   protected get dataVersion(): Version {
