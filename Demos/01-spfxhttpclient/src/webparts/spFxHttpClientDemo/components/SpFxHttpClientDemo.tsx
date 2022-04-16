@@ -8,36 +8,40 @@ import { escape } from '@microsoft/sp-lodash-subset';
 
 export default class SpFxHttpClientDemo extends React.Component<ISpFxHttpClientDemoProps, {}> {
   public render(): React.ReactElement<ISpFxHttpClientDemoProps> {
+    const {
+      spListItems,
+      onGetListItems,
+      isDarkTheme,
+      environmentMessage,
+      hasTeamsContext,
+      userDisplayName
+    } = this.props;
+
     return (
-      <div className={styles.spFxHttpClientDemo}>
-        <div className={styles.container}>
-          <div className={styles.row}>
-            <div className={styles.column}>
-              <p className={styles.title}>SharePoint Content!</p>
-              <a href="#" className={styles.button} onClick={this.onGetListItemsClicked}>
-                <span className={styles.label}>Get Counties</span>
-              </a>
-            </div>
-          </div>
-
-          <div className={styles.row}>
-            <ul className={styles.list}>
-              {this.props.spListItems &&
-                this.props.spListItems.map((list) =>
-                  <li key={list.Id} className={styles.item}>
-                    <strong>Id:</strong> {list.Id}, <strong>Title:</strong> {list.Title}
-                  </li>
-                )
-              }
-            </ul>
-          </div>
-
+      <section className={`${styles.spFxHttpClientDemo} ${hasTeamsContext ? styles.teams : ''}`}>
+        <div className={styles.welcome}>
+          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
+          <h2>Well done, {escape(userDisplayName)}!</h2>
+          <div>{environmentMessage}</div>
         </div>
-      </div>
+        <div className={styles.buttons}>
+          <button type="button" onClick={this.onGetListItemsClicked}>Get Countries</button>
+        </div>
+        <div>
+          <ul>
+            {spListItems && spListItems.map((list) =>
+              <li key={list.Id}>
+                <strong>Id:</strong> {list.Id}, <strong>Title:</strong> {list.Title}
+              </li>
+            )
+            }
+          </ul>
+        </div>
+      </section>
     );
   }
 
-  private onGetListItemsClicked = (event: React.MouseEvent<HTMLAnchorElement>): void => {
+  private onGetListItemsClicked = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
 
     this.props.onGetListItems();

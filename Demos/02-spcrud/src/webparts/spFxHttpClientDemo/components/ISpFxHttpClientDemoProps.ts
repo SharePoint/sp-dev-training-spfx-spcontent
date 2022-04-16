@@ -12,4 +12,8 @@ export interface ISpFxHttpClientDemoProps {
   onAddListItem?: ButtonClickedCallback;
   onUpdateListItem?: ButtonClickedCallback;
   onDeleteListItem?: ButtonClickedCallback;
+  isDarkTheme: boolean;
+  environmentMessage: string;
+  hasTeamsContext: boolean;
+  userDisplayName: string;
 }
