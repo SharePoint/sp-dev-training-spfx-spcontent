@@ -1,12 +1,10 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT license.
-
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import { escape } from '@microsoft/sp-lodash-subset';
 
 import styles from './FileUploadWebPart.module.scss';
@@ -23,18 +21,28 @@ export interface IFileUploadWebPartProps {
 
 export default class FileUploadWebPart extends BaseClientSideWebPart<IFileUploadWebPartProps> {
 
+  private _isDarkTheme: boolean = false;
+  private _environmentMessage: string = '';
+
+  protected onInit(): Promise<void> {
+    this._environmentMessage = this._getEnvironmentMessage();
+
+    return super.onInit();
+  }
+
   public render(): void {
     this.domElement.innerHTML = `
-      <div class="${styles.fileUpload}">
-        <div class="${styles.container}">
-          <div class="${styles.row}">
-            <div class="${styles.column}">
-              <input class="${styles.fileUpload}-fileUpload" type="file" /><br />
-              <input class="${styles.fileUpload}-uploadButton" type="button" value="Upload" />
-            </div>
-          </div>
-        </div>
-      </div>`;
+    <section class="${styles.fileUpload} ${!!this.context.sdks.microsoftTeams ? styles.teams : ''}">
+      <div class="${styles.welcome}">
+        <img alt="" src="${this._isDarkTheme ? require('./assets/welcome-dark.png') : require('./assets/welcome-light.png')}" class="${styles.welcomeImage}" />
+        <h2>Well done, ${escape(this.context.pageContext.user.displayName)}!</h2>
+        <div>${this._environmentMessage}</div>
+      </div>
+      <div class="${styles.inputs}">
+        <input class="${styles.fileUpload}-fileUpload" type="file" /><br />
+        <input class="${styles.fileUpload}-uploadButton" type="button" value="Upload" />
+      </div>
+    </section>`;
 
     // get reference to file control
     const inputFileElement = document.getElementsByClassName(`${styles.fileUpload}-fileUpload`)[0] as HTMLInputElement;
@@ -93,6 +101,29 @@ export default class FileUploadWebPart extends BaseClientSideWebPart<IFileUpload
     } else {
       throw new Error(`Error uploading file: ${response.statusText}`);
     }
+  }
+
+  private _getEnvironmentMessage(): string {
+    if (!!this.context.sdks.microsoftTeams) { // running in Teams
+      return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
+    }
+
+    return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment;
+  }
+
+  protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {
+    if (!currentTheme) {
+      return;
+    }
+
+    this._isDarkTheme = !!currentTheme.isInverted;
+    const {
+      semanticColors
+    } = currentTheme;
+    this.domElement.style.setProperty('--bodyText', semanticColors.bodyText);
+    this.domElement.style.setProperty('--link', semanticColors.link);
+    this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered);
+
   }
 
   protected get dataVersion(): Version {

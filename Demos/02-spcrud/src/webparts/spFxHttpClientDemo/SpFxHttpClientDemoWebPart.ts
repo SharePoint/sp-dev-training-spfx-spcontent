@@ -9,6 +9,7 @@ import {
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 import * as strings from 'SpFxHttpClientDemoWebPartStrings';
 import SpFxHttpClientDemo from './components/SpFxHttpClientDemo';
@@ -22,7 +23,16 @@ export interface ISpFxHttpClientDemoWebPartProps {
 }
 
 export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISpFxHttpClientDemoWebPartProps> {
+
+  private _isDarkTheme: boolean = false;
+  private _environmentMessage: string = '';
   private _countries: ICountryListItem[] = [];
+
+  protected onInit(): Promise<void> {
+    this._environmentMessage = this._getEnvironmentMessage();
+
+    return super.onInit();
+  }
 
   public render(): void {
     const element: React.ReactElement<ISpFxHttpClientDemoProps> = React.createElement(
@@ -32,7 +42,11 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
         onGetListItems: this._onGetListItems,
         onAddListItem: this._onAddListItem,
         onUpdateListItem: this._onUpdateListItem,
-        onDeleteListItem: this._onDeleteListItem
+        onDeleteListItem: this._onDeleteListItem,
+        isDarkTheme: this._isDarkTheme,
+        environmentMessage: this._environmentMessage,
+        hasTeamsContext: !!this.context.sdks.microsoftTeams,
+        userDisplayName: this.context.pageContext.user.displayName
       }
     );
 
@@ -57,7 +71,7 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
           });
       });
   }
-
+  
   private _onUpdateListItem = (): void => {
     this._updateListItem()
       .then(() => {
@@ -68,7 +82,7 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
           });
       });
   }
-
+  
   private _onDeleteListItem = (): void => {
     this._deleteListItem()
       .then(() => {
@@ -174,6 +188,29 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
           SPHttpClient.configurations.v1,
           request);
       });
+  }
+
+  private _getEnvironmentMessage(): string {
+    if (!!this.context.sdks.microsoftTeams) { // running in Teams
+      return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
+    }
+
+    return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment;
+  }
+
+  protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {
+    if (!currentTheme) {
+      return;
+    }
+
+    this._isDarkTheme = !!currentTheme.isInverted;
+    const {
+      semanticColors
+    } = currentTheme;
+    this.domElement.style.setProperty('--bodyText', semanticColors.bodyText);
+    this.domElement.style.setProperty('--link', semanticColors.link);
+    this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered);
+
   }
 
   protected onDispose(): void {
