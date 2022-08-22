@@ -10,7 +10,6 @@ export default class SpFxHttpClientDemo extends React.Component<ISpFxHttpClientD
   public render(): React.ReactElement<ISpFxHttpClientDemoProps> {
     const {
       spListItems,
-      onGetListItems,
       isDarkTheme,
       environmentMessage,
       hasTeamsContext,

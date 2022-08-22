@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license.
+
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
@@ -23,12 +26,6 @@ export default class FileUploadWebPart extends BaseClientSideWebPart<IFileUpload
 
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
-
-  protected onInit(): Promise<void> {
-    this._environmentMessage = this._getEnvironmentMessage();
-
-    return super.onInit();
-  }
 
   public render(): void {
     this.domElement.innerHTML = `
@@ -65,7 +62,7 @@ export default class FileUploadWebPart extends BaseClientSideWebPart<IFileUpload
 
   private _getFileBuffer(file: File): Promise<ArrayBuffer> {
     return new Promise((resolve, reject) => {
-      let fileReader = new FileReader();
+      const fileReader = new FileReader();
 
       // write up error handler
       fileReader.onerror = (event: ProgressEvent<FileReader>) => {
@@ -103,6 +100,14 @@ export default class FileUploadWebPart extends BaseClientSideWebPart<IFileUpload
     }
   }
 
+  protected onInit(): Promise<void> {
+    this._environmentMessage = this._getEnvironmentMessage();
+
+    return super.onInit();
+  }
+
+
+
   private _getEnvironmentMessage(): string {
     if (!!this.context.sdks.microsoftTeams) { // running in Teams
       return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
@@ -120,9 +125,12 @@ export default class FileUploadWebPart extends BaseClientSideWebPart<IFileUpload
     const {
       semanticColors
     } = currentTheme;
-    this.domElement.style.setProperty('--bodyText', semanticColors.bodyText);
-    this.domElement.style.setProperty('--link', semanticColors.link);
-    this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered);
+
+    if (semanticColors) {
+      this.domElement.style.setProperty('--bodyText', semanticColors.bodyText || null);
+      this.domElement.style.setProperty('--link', semanticColors.link || null);
+      this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered || null);
+    }
 
   }
 

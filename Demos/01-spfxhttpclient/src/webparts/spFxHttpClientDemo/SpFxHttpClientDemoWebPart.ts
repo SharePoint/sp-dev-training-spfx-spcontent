@@ -15,7 +15,7 @@ import * as strings from 'SpFxHttpClientDemoWebPartStrings';
 import SpFxHttpClientDemo from './components/SpFxHttpClientDemo';
 import { ISpFxHttpClientDemoProps } from './components/ISpFxHttpClientDemoProps';
 
-import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
+import { SPHttpClient } from '@microsoft/sp-http';
 import { ICountryListItem } from '../../models';
 
 export interface ISpFxHttpClientDemoWebPartProps {
@@ -27,12 +27,6 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
   private _countries: ICountryListItem[] = [];
-
-  protected onInit(): Promise<void> {
-    this._environmentMessage = this._getEnvironmentMessage();
-
-    return super.onInit();
-  }
 
   public render(): void {
     const element: React.ReactElement<ISpFxHttpClientDemoProps> = React.createElement(
@@ -50,24 +44,31 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
     ReactDom.render(element, this.domElement);
   }
 
-  private _onGetListItems = (): void => {
-    this._getListItems()
-      .then(response => {
-        this._countries = response;
-        this.render();
-      });
+  private _onGetListItems = async (): Promise<void> => {
+    const response: ICountryListItem[] = await this._getListItems();
+    this._countries = response;
+    this.render();
   }
 
-  private _getListItems(): Promise<ICountryListItem[]> {
-    return this.context.spHttpClient.get(
+  private async _getListItems(): Promise<ICountryListItem[]> {
+    const response = await this.context.spHttpClient.get(
       this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items?$select=Id,Title`,
-      SPHttpClient.configurations.v1)
-      .then(response => {
-        return response.json();
-      })
-      .then(jsonResponse => {
-        return jsonResponse.value;
-      }) as Promise<ICountryListItem[]>;
+      SPHttpClient.configurations.v1);
+
+    if (!response.ok) {
+      const responseText = await response.text();
+      throw new Error(responseText);
+    }
+
+    const responseJson = await response.json();
+
+    return responseJson.value as ICountryListItem[];
+  }
+
+  protected onInit(): Promise<void> {
+    this._environmentMessage = this._getEnvironmentMessage();
+
+    return super.onInit();
   }
 
   private _getEnvironmentMessage(): string {
@@ -87,9 +88,12 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
     const {
       semanticColors
     } = currentTheme;
-    this.domElement.style.setProperty('--bodyText', semanticColors.bodyText);
-    this.domElement.style.setProperty('--link', semanticColors.link);
-    this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered);
+
+    if (semanticColors) {
+      this.domElement.style.setProperty('--bodyText', semanticColors.bodyText || null);
+      this.domElement.style.setProperty('--link', semanticColors.link || null);
+      this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered || null);
+    }
 
   }
 
