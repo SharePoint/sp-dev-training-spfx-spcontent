@@ -2,9 +2,9 @@
   "@microsoft/generator-sharepoint": {
     "plusBeta": false,
     "isCreatingSolution": true,
-    "version": "1.14.0",
+    "version": "1.15.2",
     "libraryName": "sp-fx-http-client-demo",
-    "libraryId": "0a59df5c-a8cd-43d6-b266-fd9e31d67c0a",
+    "libraryId": "f5715593-0973-4005-bd5b-fbf4ad9580a8",
     "environment": "spo",
     "packageManager": "npm",
     "solutionName": "SPFxHttpClientDemo",

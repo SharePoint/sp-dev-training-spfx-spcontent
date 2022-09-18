@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
-  "id": "446deed0-9127-48ea-b273-48645661b701",
+  "id": "d0edda33-fa7d-40b3-abfd-8a585a349011",
   "alias": "SpFxHttpClientDemoWebPart",
   "componentType": "WebPart",
 
@@ -16,8 +16,8 @@
   "supportsThemeVariants": true,
 
   "preconfiguredEntries": [{
-    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
-    "group": { "default": "Other" },
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
+    "group": { "default": "Advanced" },
     "title": { "default": "SPFxHttpClientDemo" },
     "description": { "default": "SPFxHttpClientDemo description" },
     "officeFabricIconFontName": "Page",
