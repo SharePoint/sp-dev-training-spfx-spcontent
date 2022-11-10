@@ -45,25 +45,25 @@ export default class SpFxHttpClientDemo extends React.Component<ISpFxHttpClientD
 
   private onGetListItemsClicked = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
-
+  
     this.props.onGetListItems();
   }
 
   private onAddListItemClicked = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
-
+  
     this.props.onAddListItem();
   }
-
+  
   private onUpdateListItemClicked = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
-
+  
     this.props.onUpdateListItem();
   }
-
+  
   private onDeleteListItemClicked = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
-
+  
     this.props.onDeleteListItem();
   }
 }
