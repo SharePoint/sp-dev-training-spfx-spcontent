@@ -54,14 +54,14 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
     const response = await this.context.spHttpClient.get(
       this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items?$select=Id,Title`,
       SPHttpClient.configurations.v1);
-
+  
     if (!response.ok) {
       const responseText = await response.text();
       throw new Error(responseText);
     }
-
+  
     const responseJson = await response.json();
-
+  
     return responseJson.value as ICountryListItem[];
   }
 
