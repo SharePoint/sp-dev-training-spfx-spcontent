@@ -1,6 +1,3 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT license.
-
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
@@ -23,10 +20,10 @@ export interface ISpFxHttpClientDemoWebPartProps {
 }
 
 export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISpFxHttpClientDemoWebPartProps> {
+  private _countries: ICountryListItem[] = [];
 
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
-  private _countries: ICountryListItem[] = [];
 
   public render(): void {
     const element: React.ReactElement<ISpFxHttpClientDemoProps> = React.createElement(
@@ -44,39 +41,38 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
     ReactDom.render(element, this.domElement);
   }
 
-  private _onGetListItems = async (): Promise<void> => {
-    const response: ICountryListItem[] = await this._getListItems();
-    this._countries = response;
-    this.render();
-  }
-
-  private async _getListItems(): Promise<ICountryListItem[]> {
-    const response = await this.context.spHttpClient.get(
-      this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items?$select=Id,Title`,
-      SPHttpClient.configurations.v1);
-  
-    if (!response.ok) {
-      const responseText = await response.text();
-      throw new Error(responseText);
-    }
-  
-    const responseJson = await response.json();
-  
-    return responseJson.value as ICountryListItem[];
-  }
-
   protected onInit(): Promise<void> {
-    this._environmentMessage = this._getEnvironmentMessage();
-
-    return super.onInit();
+    return this._getEnvironmentMessage().then(message => {
+      this._environmentMessage = message;
+    });
   }
 
-  private _getEnvironmentMessage(): string {
-    if (!!this.context.sdks.microsoftTeams) { // running in Teams
-      return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
+
+
+  private _getEnvironmentMessage(): Promise<string> {
+    if (!!this.context.sdks.microsoftTeams) { // running in Teams, office.com or Outlook
+      return this.context.sdks.microsoftTeams.teamsJs.app.getContext()
+        .then(context => {
+          let environmentMessage: string = '';
+          switch (context.app.host.name) {
+            case 'Office': // running in Office
+              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOffice : strings.AppOfficeEnvironment;
+              break;
+            case 'Outlook': // running in Outlook
+              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOutlook : strings.AppOutlookEnvironment;
+              break;
+            case 'Teams': // running in Teams
+              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
+              break;
+            default:
+              throw new Error('Unknown host');
+          }
+
+          return environmentMessage;
+        });
     }
 
-    return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment;
+    return Promise.resolve(this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment);
   }
 
   protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {
@@ -126,4 +122,26 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
       ]
     };
   }
+
+  private _onGetListItems = async (): Promise<void> => {
+    const response: ICountryListItem[] = await this._getListItems();
+    this._countries = response;
+    this.render();
+  }
+
+  private async _getListItems(): Promise<ICountryListItem[]> {
+    const response = await this.context.spHttpClient.get(
+      this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items?$select=Id,Title`,
+      SPHttpClient.configurations.v1);
+
+    if (!response.ok) {
+      const responseText = await response.text();
+      throw new Error(responseText);
+    }
+
+    const responseJson = await response.json();
+
+    return responseJson.value as ICountryListItem[];
+  }
+
 }

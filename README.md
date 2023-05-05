@@ -2,21 +2,21 @@
 
 This module will introduce you to working with SharePoint content in SharePoint Framework projects. You'll learn about the SharePoint REST API, do CRUD operations with SharePoint data, the local workbench and creating mock data in SharePoint Framework.
 
-> This module is also published as a Microsoft Learn module: [Work with SharePoint Content using the SharePoint Framework](https://docs.microsoft.com/learn/modules/sharepoint-spfx-spcontent)
+> This module is also published as a Microsoft Learn module: [Work with SharePoint Content using the SharePoint Framework](https://learn.microsoft.com/training/modules/sharepoint-spfx-spcontent)
 
 ## Lab - Work with SharePoint Content using the SharePoint Framework
 
 The lab for this module is available in multiple units within the associated Microsoft Learn module. Use the following links to jump to the specific unit. Each Microsoft Learn unit represents a different lab exercise & demo in the presentation.
 
-- [Exercise - Retrieve and display list data with the SharePoint REST API](https://docs.microsoft.com/learn/modules/sharepoint-spfx-spcontent/3-exercise-get-data)
+- [Exercise - Retrieve and display list data with the SharePoint REST API](https://learn.microsoft.com/training/modules/sharepoint-spfx-spcontent/3-exercise-get-data)
 
   In this exercise, you'll create a SharePoint Framework (SPFx) web part that will get and display data from a SharePoint list using the SharePoint REST API.
 
-- [Exercise - Write operations using the SharePoint Framework APIs and SharePoint REST API](https://docs.microsoft.com/learn/modules/sharepoint-spfx-spcontent/5-exercise-crud-operations)
+- [Exercise - Write operations using the SharePoint Framework APIs and SharePoint REST API](https://learn.microsoft.com/training/modules/sharepoint-spfx-spcontent/5-exercise-crud-operations)
 
   In this exercise, you'll extend the SharePoint Framework project from the previous exercise to add write capabilities using the SharePoint REST API.
 
-- [Exercise - Upload files to SharePoint libraries with the SharePoint REST API](https://docs.microsoft.com/learn/modules/sharepoint-spfx-spcontent/7-exercise-upload-file)
+- [Exercise - Upload files to SharePoint libraries with the SharePoint REST API](https://learn.microsoft.com/training/modules/sharepoint-spfx-spcontent/7-exercise-upload-file)
 
   In this exercise, you'll create a new web part that someone can use to select a file to upload to the current site's Documents library.
 
@@ -35,13 +35,15 @@ This module has been recorded and is available in the SharePoint Development You
 | Roles                | Author(s)                                                                                                      |
 | -------------------- | -------------------------------------------------------------------------------------------------------------- |
 | Lab Manuals / Slides | Andrew Connell (Microsoft MVP, [Voitanos](//github.com/voitanos)) [@andrewconnell](//github.com/andrewconnell) |
-| QA                   | Rob Windsor (Microsoft MVP) [@rob-windsor](//github.com/rob-windsor)                               |
+| QA                   | Rob Windsor (Microsoft MVP) [@rob-windsor](//github.com/rob-windsor)                                           |
 | Sponsor / Support    | Vesa Juvonen (Microsoft) [@VesaJuvonen](//github.com/VesaJuvonen)                                              |
 
 ## Version history
 
-| Version |        Date        |                       Comments                        |
+| Version | Date               | Comments                                              |
 | ------- | ------------------ | ----------------------------------------------------- |
+| 1.19    | May 5, 2023        | FY2023Q4 content refresh; update to SPFx v1.17.1      |
+| 1.18    | February 28, 2023  | FY2023Q3 content refresh; update to SPFx v1.16.1      |
 | 1.17    | December 5, 2022   | FY2023Q1 content refresh                              |
 | 1.16    | September 5, 2022  | FY2023Q1 content refresh, update to SPFx v1.15.2      |
 | 1.15    | May 2, 2022        | FY2022Q3 content refresh, update to SPFx v1.14        |

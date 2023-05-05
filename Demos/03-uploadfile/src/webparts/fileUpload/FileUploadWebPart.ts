@@ -1,6 +1,3 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT license.
-
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
@@ -60,60 +57,36 @@ export default class FileUploadWebPart extends BaseClientSideWebPart<IFileUpload
     });
   }
 
-  private _getFileBuffer(file: File): Promise<ArrayBuffer> {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-
-      // write up error handler
-      fileReader.onerror = (event: ProgressEvent<FileReader>) => {
-        reject(event.target.error);
-      };
-
-      // wire up when finished reading file
-      fileReader.onloadend = (event: ProgressEvent<FileReader>) => {
-        resolve(event.target.result as ArrayBuffer);
-      };
-
-      // read file
-      fileReader.readAsArrayBuffer(file);
-
+  protected onInit(): Promise<void> {
+    return this._getEnvironmentMessage().then(message => {
+      this._environmentMessage = message;
     });
   }
 
-  private async _uploadFile(fileData: ArrayBuffer, fileName: string): Promise<void> {
+  private _getEnvironmentMessage(): Promise<string> {
+    if (!!this.context.sdks.microsoftTeams) { // running in Teams, office.com or Outlook
+      return this.context.sdks.microsoftTeams.teamsJs.app.getContext()
+        .then(context => {
+          let environmentMessage: string = '';
+          switch (context.app.host.name) {
+            case 'Office': // running in Office
+              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOffice : strings.AppOfficeEnvironment;
+              break;
+            case 'Outlook': // running in Outlook
+              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOutlook : strings.AppOutlookEnvironment;
+              break;
+            case 'Teams': // running in Teams
+              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
+              break;
+            default:
+              throw new Error('Unknown host');
+          }
 
-    // create target endpoint for REST API HTTP POST
-    const endpoint = `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/GetByTitle('Documents')/RootFolder/Files/add(overwrite=true,url='${fileName}')`;
-
-    const options: ISPHttpClientOptions = {
-      headers: { 'CONTENT-LENGTH': fileData.byteLength.toString() },
-      body: fileData
-    };
-
-    // upload file
-    const response = await this.context.spHttpClient.post(endpoint, SPHttpClient.configurations.v1, options);
-
-    if (response.status === 200) {
-      alert('File uploaded successfully');
-    } else {
-      throw new Error(`Error uploading file: ${response.statusText}`);
-    }
-  }
-
-  protected onInit(): Promise<void> {
-    this._environmentMessage = this._getEnvironmentMessage();
-
-    return super.onInit();
-  }
-
-
-
-  private _getEnvironmentMessage(): string {
-    if (!!this.context.sdks.microsoftTeams) { // running in Teams
-      return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
+          return environmentMessage;
+        });
     }
 
-    return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment;
+    return Promise.resolve(this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment);
   }
 
   protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {
@@ -159,4 +132,45 @@ export default class FileUploadWebPart extends BaseClientSideWebPart<IFileUpload
       ]
     };
   }
+
+  private _getFileBuffer(file: File): Promise<ArrayBuffer> {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+
+      // write up error handler
+      fileReader.onerror = (event: ProgressEvent<FileReader>) => {
+        reject(event.target.error);
+      };
+
+      // wire up when finished reading file
+      fileReader.onloadend = (event: ProgressEvent<FileReader>) => {
+        resolve(event.target.result as ArrayBuffer);
+      };
+
+      // read file
+      fileReader.readAsArrayBuffer(file);
+
+    });
+  }
+
+  private async _uploadFile(fileData: ArrayBuffer, fileName: string): Promise<void> {
+
+    // create target endpoint for REST API HTTP POST
+    const endpoint = `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/GetByTitle('Documents')/RootFolder/Files/add(overwrite=true,url='${fileName}')`;
+
+    const options: ISPHttpClientOptions = {
+      headers: { 'CONTENT-LENGTH': fileData.byteLength.toString() },
+      body: fileData
+    };
+
+    // upload file
+    const response = await this.context.spHttpClient.post(endpoint, SPHttpClient.configurations.v1, options);
+
+    if (response.status === 200) {
+      alert('File uploaded successfully');
+    } else {
+      throw new Error(`Error uploading file: ${response.statusText}`);
+    }
+  }
+
 }

@@ -1,6 +1,3 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT license.
-
 import * as React from 'react';
 import styles from './SpFxHttpClientDemo.module.scss';
 import { ISpFxHttpClientDemoProps } from './ISpFxHttpClientDemoProps';
@@ -45,25 +42,26 @@ export default class SpFxHttpClientDemo extends React.Component<ISpFxHttpClientD
 
   private onGetListItemsClicked = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
-  
+
     this.props.onGetListItems();
   }
 
   private onAddListItemClicked = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
-  
+
     this.props.onAddListItem();
   }
-  
+
   private onUpdateListItemClicked = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
-  
+
     this.props.onUpdateListItem();
   }
-  
+
   private onDeleteListItemClicked = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
-  
+
     this.props.onDeleteListItem();
   }
+
 }
