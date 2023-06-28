@@ -1,6 +1,3 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT license.
-
 import {
   ButtonClickedCallback,
   ICountryListItem
@@ -9,11 +6,11 @@ import {
 export interface ISpFxHttpClientDemoProps {
   spListItems: ICountryListItem[];
   onGetListItems?: ButtonClickedCallback;
-  onAddListItem?: ButtonClickedCallback;
-  onUpdateListItem?: ButtonClickedCallback;
-  onDeleteListItem?: ButtonClickedCallback;
   isDarkTheme: boolean;
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
+  onAddListItem?: ButtonClickedCallback;
+  onUpdateListItem?: ButtonClickedCallback;
+  onDeleteListItem?: ButtonClickedCallback;
 }
