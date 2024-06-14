@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
-  "id": "f2b593ec-c4ba-401e-b631-59218c761f68",
+  "id": "6092361f-314c-4826-8ce7-b0743d0845b3",
   "alias": "FileUploadWebPart",
   "componentType": "WebPart",
 

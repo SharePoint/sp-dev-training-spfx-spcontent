@@ -1,10 +1,10 @@
 import { Version } from '@microsoft/sp-core-library';
 import {
-  IPropertyPaneConfiguration,
+  type IPropertyPaneConfiguration,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-import { IReadonlyTheme } from '@microsoft/sp-component-base';
+import type { IReadonlyTheme } from '@microsoft/sp-component-base';
 import { escape } from '@microsoft/sp-lodash-subset';
 
 import styles from './FileUploadWebPart.module.scss';
@@ -50,10 +50,12 @@ export default class FileUploadWebPart extends BaseClientSideWebPart<IFileUpload
       const fileName = filePathParts[filePathParts.length - 1];
 
       // get file data
-      const fileData = await this._getFileBuffer(inputFileElement.files[0]);
+      if (inputFileElement.files) {
+        const fileData = await this._getFileBuffer(inputFileElement.files[0]);
 
-      // upload file
-      await this._uploadFile(fileData, fileName);
+        // upload file
+        await this._uploadFile(fileData, fileName);
+      }
     });
   }
 
@@ -61,6 +63,46 @@ export default class FileUploadWebPart extends BaseClientSideWebPart<IFileUpload
     return this._getEnvironmentMessage().then(message => {
       this._environmentMessage = message;
     });
+  }
+
+  private _getFileBuffer(file: File): Promise<ArrayBuffer> {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+
+      // write up error handler
+      fileReader.onerror = (event: ProgressEvent<FileReader>) => {
+        reject(event.target?.error);
+      };
+
+      // wire up when finished reading file
+      fileReader.onloadend = (event: ProgressEvent<FileReader>) => {
+        resolve(event.target?.result as ArrayBuffer);
+      };
+
+      // read file
+      fileReader.readAsArrayBuffer(file);
+
+    });
+  }
+
+  private async _uploadFile(fileData: ArrayBuffer, fileName: string): Promise<void> {
+
+    // create target endpoint for REST API HTTP POST
+    const endpoint = `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/GetByTitle('Documents')/RootFolder/Files/add(overwrite=true,url='${fileName}')`;
+
+    const options: ISPHttpClientOptions = {
+      headers: { 'CONTENT-LENGTH': fileData.byteLength.toString() },
+      body: fileData
+    };
+
+    // upload file
+    const response = await this.context.spHttpClient.post(endpoint, SPHttpClient.configurations.v1, options);
+
+    if (response.status === 200) {
+      alert('File uploaded successfully');
+    } else {
+      throw new Error(`Error uploading file: ${response.statusText}`);
+    }
   }
 
   private _getEnvironmentMessage(): Promise<string> {
@@ -76,10 +118,11 @@ export default class FileUploadWebPart extends BaseClientSideWebPart<IFileUpload
               environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOutlook : strings.AppOutlookEnvironment;
               break;
             case 'Teams': // running in Teams
+            case 'TeamsModern':
               environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
               break;
             default:
-              throw new Error('Unknown host');
+              environmentMessage = strings.UnknownEnvironment;
           }
 
           return environmentMessage;
@@ -132,45 +175,4 @@ export default class FileUploadWebPart extends BaseClientSideWebPart<IFileUpload
       ]
     };
   }
-
-  private _getFileBuffer(file: File): Promise<ArrayBuffer> {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-
-      // write up error handler
-      fileReader.onerror = (event: ProgressEvent<FileReader>) => {
-        reject(event.target.error);
-      };
-
-      // wire up when finished reading file
-      fileReader.onloadend = (event: ProgressEvent<FileReader>) => {
-        resolve(event.target.result as ArrayBuffer);
-      };
-
-      // read file
-      fileReader.readAsArrayBuffer(file);
-
-    });
-  }
-
-  private async _uploadFile(fileData: ArrayBuffer, fileName: string): Promise<void> {
-
-    // create target endpoint for REST API HTTP POST
-    const endpoint = `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/GetByTitle('Documents')/RootFolder/Files/add(overwrite=true,url='${fileName}')`;
-
-    const options: ISPHttpClientOptions = {
-      headers: { 'CONTENT-LENGTH': fileData.byteLength.toString() },
-      body: fileData
-    };
-
-    // upload file
-    const response = await this.context.spHttpClient.post(endpoint, SPHttpClient.configurations.v1, options);
-
-    if (response.status === 200) {
-      alert('File uploaded successfully');
-    } else {
-      throw new Error(`Error uploading file: ${response.statusText}`);
-    }
-  }
-
 }

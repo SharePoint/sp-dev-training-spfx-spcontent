@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
-  IPropertyPaneConfiguration,
+  type IPropertyPaneConfiguration,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
@@ -20,10 +20,10 @@ export interface ISpFxHttpClientDemoWebPartProps {
 }
 
 export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISpFxHttpClientDemoWebPartProps> {
-  private _countries: ICountryListItem[] = [];
 
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
+  private _countries: ICountryListItem[] = [];
 
   public render(): void {
     const element: React.ReactElement<ISpFxHttpClientDemoProps> = React.createElement(
@@ -47,7 +47,26 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
     });
   }
 
+  private _onGetListItems = async (): Promise<void> => {
+    const response: ICountryListItem[] = await this._getListItems();
+    this._countries = response;
+    this.render();
+  }
 
+  private async _getListItems(): Promise<ICountryListItem[]> {
+    const response = await this.context.spHttpClient.get(
+      this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items?$select=Id,Title`,
+      SPHttpClient.configurations.v1);
+
+    if (!response.ok) {
+      const responseText = await response.text();
+      throw new Error(responseText);
+    }
+
+    const responseJson = await response.json();
+
+    return responseJson.value as ICountryListItem[];
+  }
 
   private _getEnvironmentMessage(): Promise<string> {
     if (!!this.context.sdks.microsoftTeams) { // running in Teams, office.com or Outlook
@@ -62,10 +81,11 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
               environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOutlook : strings.AppOutlookEnvironment;
               break;
             case 'Teams': // running in Teams
+            case 'TeamsModern':
               environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
               break;
             default:
-              throw new Error('Unknown host');
+              environmentMessage = strings.UnknownEnvironment;
           }
 
           return environmentMessage;
@@ -122,26 +142,4 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
       ]
     };
   }
-
-  private _onGetListItems = async (): Promise<void> => {
-    const response: ICountryListItem[] = await this._getListItems();
-    this._countries = response;
-    this.render();
-  }
-
-  private async _getListItems(): Promise<ICountryListItem[]> {
-    const response = await this.context.spHttpClient.get(
-      this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items?$select=Id,Title`,
-      SPHttpClient.configurations.v1);
-
-    if (!response.ok) {
-      const responseText = await response.text();
-      throw new Error(responseText);
-    }
-
-    const responseJson = await response.json();
-
-    return responseJson.value as ICountryListItem[];
-  }
-
 }
