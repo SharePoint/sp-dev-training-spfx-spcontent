@@ -2,14 +2,14 @@
   "@microsoft/generator-sharepoint": {
     "plusBeta": false,
     "isCreatingSolution": true,
-    "nodeVersion": "16.18.1",
+    "nodeVersion": "18.20.1",
     "sdksVersions": {
       "@microsoft/microsoft-graph-client": "3.0.2",
-      "@microsoft/teams-js": "2.9.1"
+      "@microsoft/teams-js": "2.12.0"
     },
-    "version": "1.17.1",
+    "version": "1.19.0",
     "libraryName": "file-upload",
-    "libraryId": "1582bfa3-0cac-4b58-8d18-fa2ce2f734df",
+    "libraryId": "c0a2dfcf-4280-46df-8150-7a5bb0deb4bc",
     "environment": "spo",
     "packageManager": "npm",
     "solutionName": "FileUpload",

@@ -10,6 +10,7 @@ declare interface IFileUploadWebPartStrings {
   AppTeamsTabEnvironment: string;
   AppOfficeEnvironment: string;
   AppOutlookEnvironment: string;
+  UnknownEnvironment: string;
 }
 
 declare module 'FileUploadWebPartStrings' {

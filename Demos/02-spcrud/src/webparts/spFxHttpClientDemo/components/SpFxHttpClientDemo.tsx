@@ -1,9 +1,16 @@
 import * as React from 'react';
 import styles from './SpFxHttpClientDemo.module.scss';
-import { ISpFxHttpClientDemoProps } from './ISpFxHttpClientDemoProps';
+import type { ISpFxHttpClientDemoProps } from './ISpFxHttpClientDemoProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 
 export default class SpFxHttpClientDemo extends React.Component<ISpFxHttpClientDemoProps, {}> {
+
+  private onGetListItemsClicked = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault();
+
+    if (this.props.onGetListItems) this.props.onGetListItems();
+  }
+
   public render(): React.ReactElement<ISpFxHttpClientDemoProps> {
     const {
       spListItems,
@@ -40,28 +47,22 @@ export default class SpFxHttpClientDemo extends React.Component<ISpFxHttpClientD
     );
   }
 
-  private onGetListItemsClicked = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    event.preventDefault();
-
-    this.props.onGetListItems();
-  }
-
   private onAddListItemClicked = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
 
-    this.props.onAddListItem();
+    if (this.props.onAddListItem) this.props.onAddListItem();
   }
 
   private onUpdateListItemClicked = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
 
-    this.props.onUpdateListItem();
+    if (this.props.onUpdateListItem) this.props.onUpdateListItem();
   }
 
   private onDeleteListItemClicked = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
 
-    this.props.onDeleteListItem();
+    if (this.props.onDeleteListItem) this.props.onDeleteListItem();
   }
 
 }
