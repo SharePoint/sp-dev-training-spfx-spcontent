@@ -31,6 +31,7 @@ export default class FileUploadWebPart extends BaseClientSideWebPart<IFileUpload
         <img alt="" src="${this._isDarkTheme ? require('./assets/welcome-dark.png') : require('./assets/welcome-light.png')}" class="${styles.welcomeImage}" />
         <h2>Well done, ${escape(this.context.pageContext.user.displayName)}!</h2>
         <div>${this._environmentMessage}</div>
+        <div>Web part property value: <strong>${escape(this.properties.description)}</strong></div>
       </div>
       <div class="${styles.inputs}">
         <input class="${styles.fileUpload}-fileUpload" type="file" /><br />
