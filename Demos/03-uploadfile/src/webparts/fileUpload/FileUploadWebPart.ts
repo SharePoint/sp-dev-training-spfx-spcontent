@@ -9,6 +9,8 @@ import { escape } from '@microsoft/sp-lodash-subset';
 
 import styles from './FileUploadWebPart.module.scss';
 import * as strings from 'FileUploadWebPartStrings';
+import welcomeDark from './assets/welcome-dark.png';
+import welcomeLight from './assets/welcome-light.png';
 
 import {
   ISPHttpClientOptions,
@@ -26,18 +28,17 @@ export default class FileUploadWebPart extends BaseClientSideWebPart<IFileUpload
 
   public render(): void {
     this.domElement.innerHTML = `
-    <section class="${styles.fileUpload} ${!!this.context.sdks.microsoftTeams ? styles.teams : ''}">
-      <div class="${styles.welcome}">
-        <img alt="" src="${this._isDarkTheme ? require('./assets/welcome-dark.png') : require('./assets/welcome-light.png')}" class="${styles.welcomeImage}" />
-        <h2>Well done, ${escape(this.context.pageContext.user.displayName)}!</h2>
-        <div>${this._environmentMessage}</div>
-        <div>Web part property value: <strong>${escape(this.properties.description)}</strong></div>
-      </div>
-      <div class="${styles.inputs}">
-        <input class="${styles.fileUpload}-fileUpload" type="file" /><br />
-        <input class="${styles.fileUpload}-uploadButton" type="button" value="Upload" />
-      </div>
-    </section>`;
+  <section class="${styles.fileUpload} ${!!this.context.sdks.microsoftTeams ? styles.teams : ''}">
+    <div class="${styles.welcome}">
+      <img alt="" src="${this._isDarkTheme ? welcomeDark : welcomeLight}" className="${styles.welcomeImage}" />
+      <h2>Well done, ${escape(this.context.pageContext.user.displayName)}!</h2>
+      <div>${this._environmentMessage}</div>
+    </div>
+    <div class="${styles.inputs}">
+      <input class="${styles.fileUpload}-fileUpload" type="file" /><br />
+      <input class="${styles.fileUpload}-uploadButton" type="button" value="Upload" />
+    </div>
+  </section>`;
 
     // get reference to file control
     const inputFileElement = document.getElementsByClassName(`${styles.fileUpload}-fileUpload`)[0] as HTMLInputElement;
