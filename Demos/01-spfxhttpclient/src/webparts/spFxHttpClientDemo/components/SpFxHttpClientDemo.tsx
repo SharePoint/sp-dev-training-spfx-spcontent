@@ -2,15 +2,10 @@ import * as React from 'react';
 import styles from './SpFxHttpClientDemo.module.scss';
 import type { ISpFxHttpClientDemoProps } from './ISpFxHttpClientDemoProps';
 import { escape } from '@microsoft/sp-lodash-subset';
+import welcomeDark from '../assets/welcome-dark.png';
+import welcomeLight from '../assets/welcome-light.png';
 
-export default class SpFxHttpClientDemo extends React.Component<ISpFxHttpClientDemoProps, {}> {
-
-  private onGetListItemsClicked = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    event.preventDefault();
-
-    if (this.props.onGetListItems) this.props.onGetListItems();
-  }
-
+export default class SpFxHttpClientDemo extends React.Component<ISpFxHttpClientDemoProps> {
   public render(): React.ReactElement<ISpFxHttpClientDemoProps> {
     const {
       spListItems,
@@ -23,7 +18,7 @@ export default class SpFxHttpClientDemo extends React.Component<ISpFxHttpClientD
     return (
       <section className={`${styles.spFxHttpClientDemo} ${hasTeamsContext ? styles.teams : ''}`}>
         <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
+          <img alt="" src="${this._isDarkTheme ? welcomeDark : welcomeLight}" className="${styles.welcomeImage}" />
           <h2>Well done, {escape(userDisplayName)}!</h2>
           <div>{environmentMessage}</div>
         </div>
@@ -42,5 +37,12 @@ export default class SpFxHttpClientDemo extends React.Component<ISpFxHttpClientD
         </div>
       </section>
     );
+  }
+
+  private onGetListItemsClicked = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault();
+
+
+    if (this.props.onGetListItems) this.props.onGetListItems();
   }
 }
